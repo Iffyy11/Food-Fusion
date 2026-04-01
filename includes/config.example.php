@@ -2,6 +2,13 @@
 declare(strict_types=1);
 
 // Copy this file to config.php and set your database credentials.
+//
+// Render / Docker: set env vars instead of this file (see render.yaml).
+//   DATABASE_URL=mysql://user:pass@host:3306/dbname
+//   DB_SKIP_CREATE_DATABASE=1
+// Or: DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS (+ DB_SKIP_CREATE_DATABASE=1).
+// Render’s built-in DB is PostgreSQL — use an external MySQL-compatible database.
+//
 // Use 127.0.0.1 on Windows so PHP uses TCP (not a missing MySQL socket).
 const DB_HOST = '127.0.0.1';
 /** MySQL port — XAMPP/WAMP default is 3306 */
