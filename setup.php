@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Task 1 — Database setup: tables with primary keys, foreign keys, and appropriate data types.
  * Run once in the browser after configuring includes/config.php.
  */
-require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/config_load.php';
 
 header('Content-Type: text/html; charset=utf-8');
 
