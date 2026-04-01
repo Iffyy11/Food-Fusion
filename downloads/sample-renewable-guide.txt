@@ -1,0 +1,5 @@
+Short guide: home energy and cooking (PDF placeholder)
+======================================================
+1. Grid mix: know whether your region uses wind, solar, gas, or nuclear baseload.
+2. Time-of-use tariffs: run dishwasher/oven off-peak if your supplier rewards it.
+3. Efficient appliances: look for energy labels when upgrading.

@@ -1,0 +1,11 @@
+# Local database credentials (use includes/config.example.php as a template)
+includes/config.php
+
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
