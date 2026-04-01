@@ -7,6 +7,7 @@ declare(strict_types=1);
 //   DATABASE_URL=mysql://user:pass@host:3306/dbname
 //   DB_SKIP_CREATE_DATABASE=1
 // Or: DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS (+ DB_SKIP_CREATE_DATABASE=1).
+// If TLS fails on a cloud MySQL host, set MYSQL_SSL_DISABLE_VERIFY=1 (dev only).
 // Render’s built-in DB is PostgreSQL — use an external MySQL-compatible database.
 //
 // Use 127.0.0.1 on Windows so PHP uses TCP (not a missing MySQL socket).

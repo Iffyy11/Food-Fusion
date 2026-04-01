@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/config_load.php';
+require_once __DIR__ . '/pdo_mysql_options.php';
 
 function db(): PDO
 {
@@ -19,10 +20,7 @@ function db(): PDO
     );
 
     try {
-        $pdo = new PDO($dsn, DB_USER, DB_PASS, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ]);
+        $pdo = new PDO($dsn, DB_USER, DB_PASS, foodfusion_pdo_mysql_options());
         return $pdo;
     } catch (PDOException $e) {
         if (PHP_SAPI !== 'cli' && !headers_sent()) {
