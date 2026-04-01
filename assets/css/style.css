@@ -198,6 +198,22 @@ body.modal-open {
     color: var(--primary);
     text-decoration: none;
 }
+.logo-wordmark {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1.05;
+}
+.logo-main {
+    display: block;
+}
+.logo-sub {
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+}
 
 .site-nav ul {
     list-style: none;
@@ -220,13 +236,24 @@ body.modal-open {
     display: inline-flex;
     align-items: center;
     border-radius: 999px;
-    transition: color 0.15s, background 0.15s;
+    border: 1px solid transparent;
+    transition: color 0.15s, background 0.15s, border-color 0.15s, transform 0.12s;
 }
 .site-nav a:hover,
 .site-nav a:focus {
     color: var(--primary);
     background: var(--primary-soft);
+    border-color: rgba(194, 65, 12, 0.2);
     outline: none;
+}
+.site-nav a:active {
+    transform: translateY(1px);
+}
+.site-nav a.is-active {
+    color: #ffffff;
+    background: linear-gradient(145deg, #ea580c, #c2410c);
+    border-color: rgba(154, 52, 18, 0.9);
+    box-shadow: 0 3px 12px rgba(194, 65, 12, 0.25);
 }
 
 .hi {
@@ -1320,10 +1347,18 @@ details summary {
 
 /* —— Logo mark, theme toggle, homepage extras —— */
 .logo-mark {
-    width: 11px;
-    height: 30px;
-    border-radius: 4px;
-    background: linear-gradient(180deg, #fb923c, #c2410c);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #fffbeb;
+    background: linear-gradient(145deg, #fb923c, #c2410c);
     box-shadow: 0 2px 10px rgba(194, 65, 12, 0.35);
 }
 
@@ -1912,6 +1947,9 @@ details summary {
 [data-theme="dark"] .logo {
     color: #fafaf9;
 }
+[data-theme="dark"] .logo-sub {
+    color: #d6d3d1;
+}
 [data-theme="dark"] .logo:hover,
 [data-theme="dark"] .logo:focus {
     color: #fdba74;
@@ -1923,6 +1961,12 @@ details summary {
 [data-theme="dark"] .site-nav a:focus {
     color: #ffedd5;
     background: rgba(251, 146, 60, 0.12);
+}
+[data-theme="dark"] .site-nav a.is-active {
+    color: #431407;
+    background: linear-gradient(145deg, #fdba74, #fb923c);
+    border-color: #fb923c;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 [data-theme="dark"] .hi {
     color: #a8a29e;
@@ -2479,4 +2523,44 @@ details summary {
 [data-theme="dark"] .resource-list.resource-list-cards li {
     background: #292524;
     border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* —— Profile page —— */
+.profile-stats {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 1rem;
+}
+@media (max-width: 720px) {
+    .profile-stats {
+        grid-template-columns: 1fr;
+    }
+}
+.profile-stat-card {
+    background: linear-gradient(165deg, var(--surface) 0%, var(--surface-elevated) 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    text-align: center;
+}
+.profile-stat-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    line-height: 1.1;
+    color: var(--primary);
+}
+.profile-stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+}
+.profile-form-card {
+    max-width: 760px;
+}
+[data-theme="dark"] .profile-stat-card {
+    background: #292524;
+    border-color: rgba(255, 255, 255, 0.12);
 }

@@ -1,8 +1,0 @@
-.git
-.gitignore
-.dockerignore
-*.md
-Thumbs.db
-.DS_Store
-.idea
-.vscode

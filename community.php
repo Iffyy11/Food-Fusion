@@ -119,7 +119,7 @@ require __DIR__ . '/includes/header.php';
 
 <section class="card">
     <h1>Community Cookbook</h1>
-    <p class="lede">Share favourite recipes, tips, and kitchen stories. Log in to post or comment — or use the <strong>web service</strong> at <code>api/community_submit.php</code> (JSON, session cookie).</p>
+    <p class="lede">Share favourite recipes, tips, and kitchen stories. Log in to post or comment.</p>
     <?php if ($flash !== ''): ?>
         <p class="notice <?= $flashOk ? 'success' : 'error' ?>"><?= htmlspecialchars($flash, ENT_QUOTES, 'UTF-8') ?></p>
     <?php endif; ?>
@@ -206,7 +206,7 @@ require __DIR__ . '/includes/header.php';
     <?php if (current_user_id() !== null): ?>
         <section class="card">
             <h2>Share with the community</h2>
-            <p>Use this form or submit via <code>POST api/community_submit.php</code> with JSON.</p>
+            <p>Use this form to publish your recipe or story with the community.</p>
             <form method="post" class="stack">
                 <input type="hidden" name="action" value="post">
                 <label>Title <input type="text" name="title" required maxlength="200"></label>
@@ -215,25 +215,6 @@ require __DIR__ . '/includes/header.php';
                 <label>Your experience <textarea name="experience_notes" rows="3" placeholder="What worked, what you would change…"></textarea></label>
                 <button type="submit" class="btn primary">Publish</button>
             </form>
-        </section>
-        <section class="card">
-            <h3>JavaScript submit (web service)</h3>
-            <p class="small">Open the browser console on <strong>this page</strong> while logged in, then paste and run:</p>
-            <pre class="code-block">fetch(new URL('api/community_submit.php', window.location.href), {
-  method: 'POST',
-  credentials: 'same-origin',
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json'
-  },
-  body: JSON.stringify({
-    title: 'Test from API',
-    recipe_body: 'This is a minimum-length recipe body for testing.',
-    cooking_tips: 'Taste as you go.',
-    experience_notes: 'Submitted via fetch.'
-  })
-}).then(function (r) { return r.json(); }).then(console.log);</pre>
-            <p class="small subtle">The URL is resolved from the current page, so it works at the server root or in a subfolder. Expect <code>{ ok: true, message: &quot;…&quot;, id: … }</code> on success.</p>
         </section>
     <?php else: ?>
         <section class="card">

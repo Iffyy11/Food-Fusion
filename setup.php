@@ -6,28 +6,14 @@ declare(strict_types=1);
  * Run once in the browser after configuring includes/config.php.
  */
 require_once __DIR__ . '/includes/config_load.php';
-require_once __DIR__ . '/includes/pdo_mysql_options.php';
 
 header('Content-Type: text/html; charset=utf-8');
 
-$managedDb = defined('FOODFUSION_MANAGED_DB') && FOODFUSION_MANAGED_DB === true;
-
 try {
-    if ($managedDb) {
-        $dsn = sprintf(
-            'mysql:host=%s;port=%d;dbname=%s;charset=%s',
-            DB_HOST,
-            DB_PORT,
-            DB_NAME,
-            DB_CHARSET
-        );
-        $pdo = new PDO($dsn, DB_USER, DB_PASS, foodfusion_pdo_mysql_options());
-    } else {
-        $dsn = sprintf('mysql:host=%s;port=%d;charset=%s', DB_HOST, DB_PORT, DB_CHARSET);
-        $pdo = new PDO($dsn, DB_USER, DB_PASS, foodfusion_pdo_mysql_options());
-        $pdo->exec('CREATE DATABASE IF NOT EXISTS `' . str_replace('`', '``', DB_NAME) . '` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
-        $pdo->exec('USE `' . str_replace('`', '``', DB_NAME) . '`');
-    }
+    $dsn = sprintf('mysql:host=%s;port=%d;charset=%s', DB_HOST, DB_PORT, DB_CHARSET);
+    $pdo = new PDO($dsn, DB_USER, DB_PASS, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $pdo->exec('CREATE DATABASE IF NOT EXISTS `' . str_replace('`', '``', DB_NAME) . '` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
+    $pdo->exec('USE `' . str_replace('`', '``', DB_NAME) . '`');
 
     $pdo->exec(<<<'SQL'
 CREATE TABLE IF NOT EXISTS users (

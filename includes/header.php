@@ -8,6 +8,10 @@ if (!isset($pageTitle)) {
 }
 $displayName = null;
 $loggedIn = current_user_id() !== null;
+if (!isset($ffRequestStart)) {
+    $ffRequestStart = $_SERVER['REQUEST_TIME_FLOAT'] ?? microtime(true);
+}
+$currentPage = basename((string) ($_SERVER['PHP_SELF'] ?? ''));
 if (isset($_SESSION['user_first_name'])) {
     $displayName = (string) $_SESSION['user_first_name'];
 }
@@ -23,6 +27,8 @@ $logoHref = $loggedIn ? 'index.php' : 'login.php';
     <meta name="theme-color" content="#c2410c">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="shortcut icon" href="assets/favicon.svg">
     <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
     <script>
     (function(){try{var t=localStorage.getItem('ff-theme');var m=document.querySelector('meta[name="theme-color"]');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);if(m)m.setAttribute('content',t==='dark'?'#1c1917':'#c2410c');}}catch(e){}})();
@@ -37,22 +43,29 @@ $logoHref = $loggedIn ? 'index.php' : 'login.php';
 <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 <header class="site-header">
     <div class="inner">
-        <a class="logo" href="<?= htmlspecialchars($logoHref, ENT_QUOTES, 'UTF-8') ?>"><span class="logo-mark" aria-hidden="true"></span> FoodFusion</a>
+        <a class="logo" href="<?= htmlspecialchars($logoHref, ENT_QUOTES, 'UTF-8') ?>">
+            <span class="logo-mark" aria-hidden="true">FF</span>
+            <span class="logo-wordmark">
+                <span class="logo-main">FoodFusion</span>
+                <span class="logo-sub">Kitchen Club</span>
+            </span>
+        </a>
         <nav id="site-nav" class="site-nav" aria-label="Main">
             <ul>
                 <?php if ($loggedIn): ?>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="about.php">About Us</a></li>
-                    <li><a href="recipes.php">Recipe Collection</a></li>
-                    <li><a href="community.php">Community Cookbook</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
-                    <li><a href="culinary_resources.php">Culinary Resources</a></li>
-                    <li><a href="educational_resources.php">Educational Resources</a></li>
+                    <li><a href="index.php" class="<?= $currentPage === 'index.php' ? 'is-active' : '' ?>" <?= $currentPage === 'index.php' ? 'aria-current="page"' : '' ?>>Home</a></li>
+                    <li><a href="about.php" class="<?= $currentPage === 'about.php' ? 'is-active' : '' ?>" <?= $currentPage === 'about.php' ? 'aria-current="page"' : '' ?>>About Us</a></li>
+                    <li><a href="recipes.php" class="<?= $currentPage === 'recipes.php' ? 'is-active' : '' ?>" <?= $currentPage === 'recipes.php' ? 'aria-current="page"' : '' ?>>Recipe Collection</a></li>
+                    <li><a href="community.php" class="<?= $currentPage === 'community.php' ? 'is-active' : '' ?>" <?= $currentPage === 'community.php' ? 'aria-current="page"' : '' ?>>Community Cookbook</a></li>
+                    <li><a href="contact.php" class="<?= $currentPage === 'contact.php' ? 'is-active' : '' ?>" <?= $currentPage === 'contact.php' ? 'aria-current="page"' : '' ?>>Contact Us</a></li>
+                    <li><a href="culinary_resources.php" class="<?= $currentPage === 'culinary_resources.php' ? 'is-active' : '' ?>" <?= $currentPage === 'culinary_resources.php' ? 'aria-current="page"' : '' ?>>Culinary Resources</a></li>
+                    <li><a href="educational_resources.php" class="<?= $currentPage === 'educational_resources.php' ? 'is-active' : '' ?>" <?= $currentPage === 'educational_resources.php' ? 'aria-current="page"' : '' ?>>Educational Resources</a></li>
+                    <li><a href="profile.php" class="<?= $currentPage === 'profile.php' ? 'is-active' : '' ?>" <?= $currentPage === 'profile.php' ? 'aria-current="page"' : '' ?>>My Profile</a></li>
                     <li><span class="hi">Hi, <?= htmlspecialchars($displayName ?? '', ENT_QUOTES, 'UTF-8') ?></span></li>
                     <li><a href="logout.php">Log out</a></li>
                 <?php else: ?>
-                    <li><a href="login.php">Log in</a></li>
-                    <li><a href="register.php">Sign up</a></li>
+                    <li><a href="login.php" class="<?= $currentPage === 'login.php' ? 'is-active' : '' ?>" <?= $currentPage === 'login.php' ? 'aria-current="page"' : '' ?>>Log in</a></li>
+                    <li><a href="register.php" class="<?= $currentPage === 'register.php' ? 'is-active' : '' ?>" <?= $currentPage === 'register.php' ? 'aria-current="page"' : '' ?>>Sign up</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
