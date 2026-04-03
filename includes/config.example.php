@@ -2,6 +2,10 @@
 declare(strict_types=1);
 
 // Copy this file to config.php and set your database credentials.
+//
+// Railway: link MySQL service variables to the web service (MYSQLHOST, MYSQLUSER,
+// MYSQLPASSWORD, MYSQLDATABASE, MYSQLPORT). No config.php needed on the server.
+//
 // Use 127.0.0.1 on Windows so PHP uses TCP (not a missing MySQL socket).
 const DB_HOST = '127.0.0.1';
 /** MySQL port — XAMPP/WAMP default is 3306 */
